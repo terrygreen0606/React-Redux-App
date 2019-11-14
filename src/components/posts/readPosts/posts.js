@@ -7,18 +7,14 @@ import { fetchPosts } from '../../../actions/posts/postsAction'
 import Comments from '../../comments/readComments/comments'
 
 
+
 export class Posts extends Component {
 
     componentDidMount() {
-        this.props.fetchPosts()
-    }
-
-    componentDidUpdate() {        
-        this.props.posts.unshift(this.props.newPost)
+        this.props.fetchPosts()   
     }
 
     render() {
-
         const posts = this.props.posts.map( post => (
             <div key={post.id}>
                 <h2>Posts</h2>
@@ -40,14 +36,12 @@ export class Posts extends Component {
 const mapStateToProps = state => ({
 
     posts: state.posts.postItems,
-    newPost: state.posts.postItem,
 })
 
 Posts.propTypes = {
 
     fetchPosts: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired,
-    newPost: PropTypes.object,
 }
 
 export default connect( mapStateToProps, {fetchPosts} )(Posts)

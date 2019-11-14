@@ -6,35 +6,39 @@ import './comments.css'
 
 import { fetchComments } from '../../../actions/comments/commentsAction'
 
+import NewComment from '../../comments/createComment/newComment'
+
 export class Comments extends Component {
 
     componentDidMount() {
         this.props.fetchComments()
-        console.log(this.props.postId)
     }
 
-    CommentsAfterPost(postId, title, email, body) {
+    commentsAfterPost(postId, name, email, body) {
+        
         if (this.props.postId === postId) {
             return (
                 <Fragment>
-                    <h4>Title : {title}</h4>
+                    <h4>Title : {name}</h4>
                     <h5>Email : {email}</h5>
                     <span>Content : {body}</span>
+                    <hr />
                 </Fragment>
             )
         }
     }
 
     render() {
-
+        console.log(this.props.comments)
         const comments = this.props.comments.map( comment => (
             <Fragment key={comment.id}>
-                {this.CommentsAfterPost(comment.postId, comment.name, comment.email, comment.body)}
+                {this.commentsAfterPost(comment.postId, comment.name, comment.email, comment.body)}
             </Fragment>
         ))
 
         return (
             <div className="position">
+                <NewComment postId={this.props.postId}/>
                 <h3>Comments</h3>
                 {comments}
             </div>
@@ -44,11 +48,11 @@ export class Comments extends Component {
 
 Comments.propTypes = {
     fetchComments: PropTypes.func.isRequired,
-    comments: PropTypes.array.isRequired
+    comments: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({
-    comments: state.comments.comments
+    comments: state.comments.comments,
 })
 
 export default connect(mapStateToProps, {fetchComments})(Comments)

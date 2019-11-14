@@ -1,14 +1,12 @@
 import { FETCH_POSTS, NEW_POST } from '../../actions/types'
 
 const initialState = {
-    postItems: [],
-    postItem: {}
+    postItems: []
 }
 
 export default function ( state = initialState, action) {
     switch(action.type) {
 
-        // POSTS
         case FETCH_POSTS:
             return {
                 ...state,
@@ -18,7 +16,7 @@ export default function ( state = initialState, action) {
         case NEW_POST:
             return {
                 ...state,
-                postItem: action.payload
+                postItems: [action.payload, ...state.postItems]                 // Put the new post in front of the postItems array
             }
 
         default:
