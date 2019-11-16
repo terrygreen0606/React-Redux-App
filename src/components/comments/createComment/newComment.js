@@ -33,6 +33,12 @@ export class NewComment extends Component {
         }
 
         this.props.newComment(newComment)
+
+        this.setState({
+            title: '',
+            email: '',
+            content: '',
+        })
     }
 
     render() {

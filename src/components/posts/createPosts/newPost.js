@@ -25,6 +25,11 @@ export class NewPost extends Component {
         }
 
         this.props.newPost(newPost)
+
+        this.setState({
+            title: '',
+            body: ''
+        })
     }
 
     onChange = (e) => {
